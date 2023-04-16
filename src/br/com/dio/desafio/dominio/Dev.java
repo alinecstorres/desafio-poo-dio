@@ -6,20 +6,30 @@ public class Dev {
     private String nome;
     private Set<Conteudo> conteudosInscritos = new LinkedHashSet<>();
     private Set<Conteudo> conteudosConcluidos = new LinkedHashSet<>();
+    private Set<Certificado> certificados = new LinkedHashSet<>();
 
     public void inscreverBootcamp(Bootcamp bootcamp){
         this.conteudosInscritos.addAll(bootcamp.getConteudos());
         bootcamp.getDevsInscritos().add(this);
     }
 
-    public void progredir() {
-        Optional<Conteudo> conteudo = this.conteudosInscritos.stream().findFirst();
-        if(conteudo.isPresent()) {
-            this.conteudosConcluidos.add(conteudo.get());
-            this.conteudosInscritos.remove(conteudo.get());
-        } else {
-            System.err.println("Você não está matriculado em nenhum conteúdo!");
-        }
+    //Método agora precisa de parâmetro
+    public void progredir(Conteudo conteudo) {
+        
+        if(conteudo.getClass().getName().contains("Curso")) {
+            //Gerando certificado do curso
+            Certificado certificado = new Certificado();
+            certificado.setDev(this.nome);
+            certificado.setTitulo(conteudo.getTitulo());
+            //cast para pegar método da classe filha
+            certificado.setCargaHoraria(conteudo.getCargaHoraria(((Curso)conteudo)));
+            this.certificados.add(certificado);
+
+            System.out.println("__________________________________________\n----------------CERTIFICADO---------------\nCertificamos que\n" + certificado.getDev() + "\nem " + certificado.getDataConclusao() + ", concluiu o curso\n" + certificado.getTitulo() + "\ncom carga horária total de " + certificado.getCargaHoraria() + " horas.\n__________________________________________");
+        } 
+
+        this.conteudosConcluidos.add(conteudo);
+        this.conteudosInscritos.remove(conteudo);
     }
 
     public double calcularTotalXp() {
@@ -62,16 +72,25 @@ public class Dev {
         this.conteudosConcluidos = conteudosConcluidos;
     }
 
+    public Set<Certificado> getCertificados() {
+        return certificados;
+    }
+
+    public void setCertificados(Set<Certificado> certificados) {
+        this.certificados = certificados;
+    }    
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Dev dev = (Dev) o;
-        return Objects.equals(nome, dev.nome) && Objects.equals(conteudosInscritos, dev.conteudosInscritos) && Objects.equals(conteudosConcluidos, dev.conteudosConcluidos);
+        return Objects.equals(nome, dev.nome) && Objects.equals(conteudosInscritos, dev.conteudosInscritos) && Objects.equals(conteudosConcluidos, dev.conteudosConcluidos) && Objects.equals(certificados, dev.certificados);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nome, conteudosInscritos, conteudosConcluidos);
+        return Objects.hash(nome, conteudosInscritos, conteudosConcluidos, certificados);
     }
+
 }

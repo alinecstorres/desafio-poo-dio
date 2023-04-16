@@ -24,4 +24,9 @@ public abstract class Conteudo {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    // Método para acessar o método da classe filha
+    public int getCargaHoraria(Curso curso) {
+        return curso.getCargaHoraria();
+    }
 }

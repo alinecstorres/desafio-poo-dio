@@ -32,32 +32,29 @@ public class Main {
         bootcamp.getConteudos().add(curso1);
         bootcamp.getConteudos().add(curso2);
         bootcamp.getConteudos().add(mentoria);
-
+        
         Dev devCamila = new Dev();
         devCamila.setNome("Camila");
         devCamila.inscreverBootcamp(bootcamp);
         System.out.println("Conteúdos Inscritos Camila:" + devCamila.getConteudosInscritos());
-        devCamila.progredir();
-        devCamila.progredir();
-        System.out.println("-");
-        System.out.println("Conteúdos Inscritos Camila:" + devCamila.getConteudosInscritos());
-        System.out.println("Conteúdos Concluídos Camila:" + devCamila.getConteudosConcluidos());
-        System.out.println("XP:" + devCamila.calcularTotalXp());
-
-        System.out.println("-------");
 
         Dev devJoao = new Dev();
         devJoao.setNome("Joao");
         devJoao.inscreverBootcamp(bootcamp);
         System.out.println("Conteúdos Inscritos João:" + devJoao.getConteudosInscritos());
-        devJoao.progredir();
-        devJoao.progredir();
-        devJoao.progredir();
-        System.out.println("-");
-        System.out.println("Conteúdos Inscritos João:" + devJoao.getConteudosInscritos());
-        System.out.println("Conteúdos Concluidos João:" + devJoao.getConteudosConcluidos());
-        System.out.println("XP:" + devJoao.calcularTotalXp());
+        
+        System.out.println("\n-----> Devs inscritos no Bootcamp Fullstack: <-----\n\n" + "1) " + devCamila.getNome() + "\n-----> Cursos a realizar:\n" + devCamila.getConteudosInscritos() + "\n\n" + "2) " + devJoao.getNome() + "\n-----> Cursos a realizar:\n" + devJoao.getConteudosInscritos());
 
+        devCamila.progredir(mentoria);
+        devCamila.progredir(curso2);
+        devJoao.progredir(mentoria);
+        devJoao.progredir(curso2);
+        devJoao.progredir(curso1);
+
+        System.out.println("\n-----> Atualizando o progresso dos Devs : <-----\n\n" + "1) " + devCamila.getNome() + "\n-----> Cursos a realizar:\n" + devCamila.getConteudosInscritos() + "\n-----> Cursos concluídos:\n" + devCamila.getConteudosConcluidos() + "\n-----> XP do Aluno: " +devCamila.calcularTotalXp() + "\n\n" + "2) " + devJoao.getNome() + "\n-----> Cursos a realizar:\n" + devJoao.getConteudosInscritos() + "\n-----> Cursos concluídos:\n" + devJoao.getConteudosConcluidos() + "\n-----> XP do Aluno: " + devJoao.calcularTotalXp() + "\n");
+
+        System.out.println(devCamila.getCertificados());
+        System.out.println(devJoao.getCertificados());
     }
 
 }

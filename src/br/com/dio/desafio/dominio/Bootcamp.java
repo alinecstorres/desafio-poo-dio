@@ -14,6 +14,16 @@ public class Bootcamp {
     private Set<Dev> devsInscritos = new HashSet<>();
     private Set<Conteudo> conteudos = new LinkedHashSet<>();
 
+    public int calcularCargaHoraria() {
+        int cargaHorariaTotal = 0;
+        for (Conteudo conteudo : conteudos) {
+            if (conteudo.getClass().getName().contains("Curso")) {
+                cargaHorariaTotal += conteudo.getCargaHoraria(((Curso)conteudo));
+            }
+            
+        }
+        return cargaHorariaTotal;
+    }
 
     public String getNome() {
         return nome;

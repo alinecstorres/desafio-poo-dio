@@ -17,3 +17,6 @@ No método Dev.progredir(), inclui o argumento obrigatório Conteudo, para que o
 
 <p>Criei o objeto Certificado, que é gerado a partir do método Dev.progredir(), como também é adicionado a uma lista de certificados que o Dev possui.</p>
 
+<h3>🔸 4)</h3>
+
+<p>Criei uma lista de bootcamps no objeto Dev, para salvar os bootcamps que o dev se inscreveu e ainda fiz um método gerarCertificado() para que assim que o dev finalizar o bootcamp, sega gerado o certificado do bootcamp automaticamente.</p>
